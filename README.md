@@ -34,7 +34,7 @@ to this:
 
 `var apiGatewayClient = new APIGatewayClient(this.simpleHttpClientConfig, this.sigV4ClientConfig);`
 
-###Utils
+### Utils
 Replace instances of `apiGateway.core.utils` for `this.utils = new Utils()`:
 
 Example:
@@ -46,6 +46,6 @@ Example:
 	utils.assertParametersDefined(params, [], ['body']);
 ``
 
-###uritemplate
+### uritemplate
 
 The variable uritemplate is exported as a function, so you shouldn't need to change anything.
