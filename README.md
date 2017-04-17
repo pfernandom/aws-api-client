@@ -6,6 +6,11 @@ A JavaScript module to consume AWS API Gateway endpoints using AWS SDK. This is 
 
 `npm install --save aws-api-client`
 
+##Background
+When we generate AWS API Gateway SDKs for JavaScript, they are built expecting you to import all the JavaScript files inside the `lib` folder, declaring everything as global variables.
+This might be useful for simple applications, but for others using bundlers like Webpack, you need to be able to import modules instead.
+This NPM module allows you to get rid of that `lib` folder by importing those JS functions instead.
+
 ##Use
 
 You can download a JavaScript SDK for your code like mentioned here: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-generate-sdk.html
