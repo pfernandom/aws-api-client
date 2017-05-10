@@ -32,17 +32,17 @@ Replace instances of `apiGateway.core.apiGatewayClientFactory.newClient` from th
 
 to this:
 
-`var apiGatewayClient = new APIGatewayClient(this.simpleHttpClientConfig, this.sigV4ClientConfig);`
+`var apiGatewayClient = new APIGatewayClient(simpleHttpClientConfig, sigV4ClientConfig);`
 
 ### Utils
-Replace instances of `apiGateway.core.utils` for `this.utils = new Utils()`:
+Replace instances of `apiGateway.core.utils` for `var utils = new Utils()`:
 
 Example:
 
 `apiGateway.core.utils.assertParametersDefined(params, [], ['body']);`
 
 ``
-	this.utils = new Utils();
+	var utils = new Utils();
 	utils.assertParametersDefined(params, [], ['body']);
 ``
 
