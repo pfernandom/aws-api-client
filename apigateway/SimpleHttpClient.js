@@ -41,12 +41,12 @@ export default class SimpleHttpClient {
 
 		//If the user has not specified an override for Content type the use default
 		if (headers['Content-Type'] === undefined) {
-			headers['Content-Type'] = config.defaultContentType;
+			headers['Content-Type'] = this.config.defaultContentType;
 		}
 
 		//If the user has not specified an override for Accept type the use default
 		if (headers['Accept'] === undefined) {
-			headers['Accept'] = config.defaultAcceptType;
+			headers['Accept'] = this.config.defaultAcceptType;
 		}
 
 		var body = this.utils.copy(request.body);
@@ -54,8 +54,8 @@ export default class SimpleHttpClient {
 			body = '';
 		}
 
-		var url = config.endpoint + path;
-		var queryString = buildCanonicalQueryString(queryParams);
+		var url = this.config.endpoint + path;
+		var queryString = this.buildCanonicalQueryString(queryParams);
 		if (queryString != '') {
 			url += '?' + queryString;
 		}
