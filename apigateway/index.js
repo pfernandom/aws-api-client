@@ -8,4 +8,15 @@ import SigV4Client from './SigV4Client'
 import SimpleHttpClient from './SimpleHttpClient'
 import {uritemplate} from './url-template'
 
-export {APIGatewayClient, Utils, SigV4Client, SimpleHttpClient, uritemplate}
+const apiGateway = {
+  core: {
+    apiGatewayClientFactory: {
+      newClient: function(simpleHttpClientConfig, sigV4ClientConfig) {
+        return new APIGatewayClient(simpleHttpClientConfig, sigV4ClientConfig)
+      }
+    },
+    utils: new Utils()
+  }
+}
+
+export {apiGateway, APIGatewayClient, Utils, SigV4Client, SimpleHttpClient, uritemplate}
