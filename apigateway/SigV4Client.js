@@ -4,6 +4,7 @@
 import Utils from './Utils'
 import axios from 'axios'
 import CryptoJS from 'crypto-js'
+import URL from 'url-parse';
 
 const AWS_SHA_256 = 'AWS4-HMAC-SHA256';
 const AWS4_REQUEST = 'aws4_request';
@@ -36,7 +37,7 @@ export default class SigV4Client {
 	}
 
 	hmac(secret, value) {
-		return CryptoJS.HmacSHA256(value, secret, {asBytes: true});
+		return CryptoJS.HmacSHA256(value, secret, { asBytes: true });
 	}
 
 	buildCanonicalRequest(method, path, queryParams, headers, payload) {
@@ -77,7 +78,7 @@ export default class SigV4Client {
 	}
 
 	fixedEncodeURIComponent(str) {
-		return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
+		return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
 			return '%' + c.charCodeAt(0).toString(16);
 		});
 	}
@@ -170,9 +171,8 @@ export default class SigV4Client {
 
 		var datetime = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z').replace(/[:\-]|\.\d{3}/g, '');
 		headers[X_AMZ_DATE] = datetime;
-		var parser = document.createElement('a');
-		parser.href = this.endpoint;
-		headers[HOST] = parser.hostname;
+		var url = new URL(this.endpoint);
+		headers[HOST] = url.hostname;
 
 		var canonicalRequest = this.buildCanonicalRequest(verb, path, queryParams, headers, body);
 		var hashedCanonicalRequest = this.hashCanonicalRequest(canonicalRequest);
